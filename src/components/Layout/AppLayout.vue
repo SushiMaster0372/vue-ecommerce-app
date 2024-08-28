@@ -1,5 +1,6 @@
 <template>
     <div class="layout">
+        <DiscountInfo />
         <AppHeader />
         <slot></slot>
         <AppFooter />
@@ -8,7 +9,8 @@
 
 <script setup lang="ts">
 import AppFooter from './AppFooter.vue'
-import AppHeader from './AppHeader.vue'
+import AppHeader from './AppHeader/AppHeader.vue'
+import DiscountInfo from './DiscountInfo.vue'
 </script>
 
 <style scoped></style>

@@ -1,14 +1,14 @@
 <template>
     <header class="app__header">
-        <button class="catalogs">Все каталоги</button>
         <div class="logo">
             <RouterLink :to="HOME_PAGE">
-                <img :src="logo" alt="" width="500" height="105" />
+                <img :src="logo" alt="" width="250" height="85" />
             </RouterLink>
         </div>
+        <NavBar />
         <div class="right__section">
-            <button class="login__btn">Войти</button>
-            <button class="cart__btn">Корзина</button>
+            <CartButton />
+            <AuthButtons />
         </div>
     </header>
 </template>
@@ -17,6 +17,9 @@
 import logo from '@/assets/logo-no-background.svg'
 import { HOME_PAGE } from '@/router'
 import { RouterLink } from 'vue-router'
+import NavBar from './NavBar/NavBar.vue'
+import CartButton from './CartButton.vue'
+import AuthButtons from './NavBar/AuthButtons.vue'
 </script>
 
 <style scoped>
@@ -29,5 +32,13 @@ import { RouterLink } from 'vue-router'
     padding: var(--layout-paddings);
     padding-top: 15px;
     padding-bottom: 15px;
+    gap: 40px;
+}
+
+.right__section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    height: 28px;
 }
 </style>
