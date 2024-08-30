@@ -1,8 +1,10 @@
 <template>
     <div class="buttons__wrapper">
-        <button v-if="isAuth" class="profile__btn" @click="openDropDown"><UserIcon /></button>
-        <button v-else @click="handleLogin" class="login__btn">Sign in</button>
-        <div v-if="shopDropDown" class="dropdown" ref="dropDownRef">
+        <button v-if="authStore.isLoggedIn" class="profile__btn" @click="openDropDown">
+            <UserIcon />
+        </button>
+        <button v-else @click="authModalStore.openAuthModal" class="login__btn">Sign in</button>
+        <div v-if="showDropDown" class="dropdown" ref="dropDownRef">
             <button class="option" @click="onProfileClick">
                 <span>Profile</span>
             </button>
@@ -19,18 +21,20 @@ import LogoutIcon from '@/components/Icons/LogoutIcon.vue'
 import UserIcon from '@/components/Icons/UserIcon.vue'
 import useOutsideClick from '@/composable/useOutsideClick'
 import { AppRoutes } from '@/router/routes'
+import useAuthStore from '@/stores/auth'
+import useAuthModal from '@/stores/authModal'
 import { ref, type VNodeRef } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-const isAuth = ref(false)
-const shopDropDown = ref(false)
+const showDropDown = ref(false)
 const dropDownRef = ref<VNodeRef | null>(null) // TODO: make Dropdown component reusable and incapsulate some logic inside of it
 
-const handleLogin = () => (isAuth.value = !isAuth.value)
+const authModalStore = useAuthModal()
+const authStore = useAuthStore()
 
-const openDropDown = () => (shopDropDown.value = true)
-const closeDropDown = () => (shopDropDown.value = false)
+const openDropDown = () => (showDropDown.value = true)
+const closeDropDown = () => (showDropDown.value = false)
 
 useOutsideClick({ elementRef: dropDownRef, callback: closeDropDown })
 
@@ -40,7 +44,7 @@ const onProfileClick = () => {
 }
 
 const onLogOutClick = () => {
-    isAuth.value = false
+    authStore.logOut
     closeDropDown()
 }
 </script>
