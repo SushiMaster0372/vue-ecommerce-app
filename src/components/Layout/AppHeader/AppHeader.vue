@@ -1,7 +1,7 @@
 <template>
     <header class="app__header">
         <div class="logo">
-            <RouterLink :to="HOME_PAGE">
+            <RouterLink :to="AppRoutes.MAIN_PAGE_URL">
                 <img :src="logo" alt="" width="250" height="85" />
             </RouterLink>
         </div>
@@ -15,11 +15,11 @@
 
 <script setup lang="ts">
 import logo from '@/assets/logo-no-background.svg'
-import { HOME_PAGE } from '@/router'
 import { RouterLink } from 'vue-router'
 import NavBar from './NavBar/NavBar.vue'
 import CartButton from './CartButton.vue'
-import AuthButtons from './NavBar/AuthButtons.vue'
+import AuthButtons from './AuthButtons.vue'
+import { AppRoutes } from '@/router/routes'
 </script>
 
 <style scoped>
@@ -38,7 +38,7 @@ import AuthButtons from './NavBar/AuthButtons.vue'
 .right__section {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 25px;
     height: 28px;
 }
 </style>
