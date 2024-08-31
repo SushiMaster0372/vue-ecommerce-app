@@ -1,19 +1,29 @@
 <template>
     <RouterLink class="cart__btn" :to="AppRoutes.CART_PAGE_URL">
-        <CartIcon />
-        <span>Cart</span>
-        <div v-if="!!cartItemsLength" class="cart__tag">
-            {{ cartItemsLength }}
+        <FontAwesomeIcon :icon="faShoppingBag" class="bag__icon" />
+        <div v-if="!!cartStore.cartItems.length" class="cart__tag">
+            {{ cartStore.cartItems.length }}
         </div>
     </RouterLink>
 </template>
 <script setup lang="ts">
-import CartIcon from '@/components/Icons/CartIcon.vue'
 import { AppRoutes } from '@/router/routes'
-import { ref } from 'vue'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faShoppingBag } from '@fortawesome/free-solid-svg-icons'
 import { RouterLink } from 'vue-router'
+import useCartStore from '@/stores/cart/cart'
+import { watch } from 'vue'
+import useAuthStore from '@/stores/auth'
 
-const cartItemsLength = ref(1)
+const cartStore = useCartStore()
+const authStore = useAuthStore()
+
+watch(
+    () => authStore.isLoggedIn,
+    () => {
+        if (authStore.isLoggedIn) cartStore.getCartItems()
+    }
+)
 </script>
 <style scoped>
 .cart__btn {
@@ -23,11 +33,9 @@ const cartItemsLength = ref(1)
     position: relative;
 }
 
-.cart__btn span {
-    font-size: 12px;
-    color: #000000;
-    font-weight: 500;
-    line-height: 20px;
+.bag__icon {
+    font-size: 22px;
+    color: var(--neutral-black-b700);
 }
 
 .cart__tag {

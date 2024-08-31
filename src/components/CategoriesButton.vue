@@ -1,12 +1,18 @@
 <template>
     <button class="categories__button" @click="handleOpen">
         <span>Categories</span>
-        <AngleDownIcon className="anlge__icon" :class="{ open: isOpen }" />
+        <FontAwesomeIcon
+            :icon="faAngleDown"
+            class="icon"
+            :rotation="isOpen ? 180 : undefined"
+            fixed-width
+        />
     </button>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
-import AngleDownIcon from './Icons/AngleDownIcon.vue'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
 
 const isOpen = ref(false)
 
@@ -20,9 +26,15 @@ const handleOpen = () => (isOpen.value = !isOpen.value)
     color: var(--neutral-black-b500);
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 10px;
 }
-.open {
-    transform: rotate(180deg);
+
+.icon {
+    transition: transform 0.4s ease;
+}
+
+.categories__button:hover,
+.categories__button:hover .icon {
+    color: var(--semantic-red-r800);
 }
 </style>

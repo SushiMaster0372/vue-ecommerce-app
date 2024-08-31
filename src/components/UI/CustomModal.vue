@@ -4,7 +4,7 @@
             <div class="header">
                 <slot name="title"></slot>
                 <button class="close__button" @click="closeModal">
-                    <XmarkIcon />
+                    <FontAwesomeIcon :icon="faXmark" class="close__icon" />
                 </button>
             </div>
             <slot name="body"></slot>
@@ -13,7 +13,8 @@
 </template>
 
 <script setup lang="ts">
-import XmarkIcon from '../Icons/XmarkIcon.vue'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
 defineProps<{
     isOpen: boolean
@@ -58,9 +59,14 @@ const closeModal = () => {
     width: 100%;
 }
 
+.close__icon {
+    font-size: 18px;
+    color: var(--neutral-black-b500);
+}
+
 .close__button {
     background: transparent;
-    padding: 4px;
+    padding: 2px;
     align-self: flex-end;
     width: fit-content;
     display: grid;

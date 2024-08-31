@@ -1,7 +1,7 @@
 <template>
     <CustomModal v-model:isOpen="store.isModalOpen">
         <template v-slot:title>
-            <h3 class="title">Sign in</h3>
+            <h3 class="title">{{ modalTitle }}</h3>
         </template>
         <template v-slot:body>
             <AuthForm />
@@ -9,11 +9,16 @@
     </CustomModal>
 </template>
 <script setup lang="ts">
-// todo: make the auth modal title changing when the auth modal type changing
 import useAuthModal from '@/stores/authModal'
 import CustomModal from '../UI/CustomModal.vue'
 import AuthForm from './AuthForm.vue'
+import { AuthFormTypes } from '@/stores/authModal/types'
+import { computed } from 'vue'
 const store = useAuthModal()
+
+const modalTitle = computed(() =>
+    store.currentFormType === AuthFormTypes.LOGIN ? 'Login' : 'Sign up'
+)
 </script>
 <style scoped>
 .title {

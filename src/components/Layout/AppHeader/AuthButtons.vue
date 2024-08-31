@@ -1,28 +1,32 @@
 <template>
     <div class="buttons__wrapper">
         <button v-if="authStore.isLoggedIn" class="profile__btn" @click="openDropDown">
-            <UserIcon />
+            <FontAwesomeIcon :icon="faCircleUser" class="user__icon" />
         </button>
-        <button v-else @click="authModalStore.openAuthModal" class="login__btn">Sign in</button>
+        <CustomButton v-else theme="bordered" @click="authModalStore.openAuthModal()"
+            >Login</CustomButton
+        >
         <div v-if="showDropDown" class="dropdown" ref="dropDownRef">
             <button class="option" @click="onProfileClick">
                 <span>Profile</span>
             </button>
             <button class="option" @click="onLogOutClick">
                 <span>Log out</span>
-                <LogoutIcon />
+                <FontAwesomeIcon :icon="faArrowRightFromBracket" class="logout__icon" />
             </button>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import LogoutIcon from '@/components/Icons/LogoutIcon.vue'
-import UserIcon from '@/components/Icons/UserIcon.vue'
+import CustomButton from '@/components/UI/CustomButton.vue'
 import useOutsideClick from '@/composable/useOutsideClick'
 import { AppRoutes } from '@/router/routes'
 import useAuthStore from '@/stores/auth'
 import useAuthModal from '@/stores/authModal'
+import { faCircleUser } from '@fortawesome/free-regular-svg-icons/faCircleUser'
+import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { ref, type VNodeRef } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -44,7 +48,7 @@ const onProfileClick = () => {
 }
 
 const onLogOutClick = () => {
-    authStore.logOut
+    authStore.logOut()
     closeDropDown()
 }
 </script>
@@ -79,6 +83,10 @@ const onLogOutClick = () => {
     height: inherit;
 }
 
+.user__icon {
+    font-size: 22px;
+}
+
 .dropdown {
     position: absolute;
     right: 0;
@@ -92,6 +100,11 @@ const onLogOutClick = () => {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+
+.logout__icon {
+    font-size: 20px;
+    color: var(--neutral-black-b500);
 }
 
 .option {

@@ -22,6 +22,11 @@ const router = createRouter({
             path: AppRoutes.CONTACT_PAGE_URL,
             name: 'contacts',
             component: () => import('../views/ContactsPage.vue')
+        },
+        {
+            path: AppRoutes.CART_PAGE_URL,
+            name: 'cart',
+            component: () => import('../views/CartPage.vue')
         }
     ]
 })

@@ -1,21 +1,18 @@
 <template>
-    <LoginForm v-if="isLoginForm" @changeFormType="changeFormType" />
-    <span v-else class="sign__up__text"
-        >Already have an account? <button @click="changeFormType">Login</button></span
-    >
+    <LoginForm v-if="isLoginForm" />
+    <SignUpForm v-else />
 </template>
+
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import LoginForm from './LoginForm.vue'
-import { AuthFormTypes } from './constants'
+import SignUpForm from './SignUpForm.vue'
+import { AuthFormTypes } from '@/stores/authModal/types'
+import useAuthModal from '@/stores/authModal'
 
-const currentFormType = ref<AuthFormTypes>(AuthFormTypes.LOGIN)
-const isLoginForm = computed(() => currentFormType.value === AuthFormTypes.LOGIN)
+const store = useAuthModal()
 
-const changeFormType = () => {
-    currentFormType.value === AuthFormTypes.LOGIN
-        ? (currentFormType.value = AuthFormTypes.SIGN_UP)
-        : (currentFormType.value = AuthFormTypes.LOGIN)
-}
+const isLoginForm = computed(() => store.currentFormType === AuthFormTypes.LOGIN)
 </script>
+
 <style scoped></style>

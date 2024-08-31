@@ -26,4 +26,8 @@ const onChange = (e: Event) => {
     width: 100%;
     height: 45px;
 }
+
+.input:focus {
+    border-color: var(--neutral-black-b900);
+}
 </style>

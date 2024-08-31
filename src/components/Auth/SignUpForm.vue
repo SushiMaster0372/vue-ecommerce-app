@@ -1,7 +1,9 @@
 <template>
-    <form class="login__form" @submit.prevent="onSubmit">
-        <GoogleAuthLink class="login__google" href="https://google.com" />
+    <form class="sign__up__form" @submit.prevent="onSubmit">
+        <GoogleAuthLink class="sign__up__google" href="https://google.com" />
         <FormDivider />
+        <label for="fullName">Full name</label>
+        <CustomInput placeholder="Enter your full name" name="fullName" id="fullName" />
         <label for="email">Email</label>
         <CustomInput placeholder="Enter your email" name="email" id="email" />
         <label for="password">Password</label>
@@ -11,17 +13,19 @@
             name="password"
             id="password"
         />
-        <button class="forgot__password">Forgot Password?</button>
+        <span class="policy__text">
+            By creating an account you agree with our Terms of {{ '\n' }} Service, Privacy Policy
+        </span>
         <CustomButton
             type="submit"
             class="submit__button"
             :disabled="authStore.loading"
             :loading="authStore.loading"
-            >Login</CustomButton
+            >Create account</CustomButton
         >
-        <span class="sign__up__text"
-            >Don't have an account?
-            <button @click="authModalStore.changeFormType" type="button">Sign up</button></span
+        <span class="sign__in__text"
+            >Already have an account?
+            <button @click="authModalStore.changeFormType" type="button">Log in</button></span
         >
     </form>
 </template>
@@ -32,52 +36,47 @@ import GoogleAuthLink from './GoogleAuthLink.vue'
 import FormDivider from './FormDivider.vue'
 import CustomButton from '../UI/CustomButton.vue'
 import useAuthStore from '@/stores/auth'
-import type { TCredentials } from '@/services/Auth/service'
+import type { TCredentialsWithFullName } from '@/services/Auth/service'
 
 const authModalStore = useAuthModal()
 const authStore = useAuthStore()
 
 const onSubmit = (e: Event) => {
     const formData = new FormData(e.target as HTMLFormElement)
-    const formDataValues = Object.fromEntries(formData) as TCredentials
-    authStore.signIn(formDataValues)
+    const formDataValues = Object.fromEntries(formData) as TCredentialsWithFullName
+    authStore.sighUp(formDataValues)
 }
 </script>
 <style scoped>
-.login__form {
+.sign__up__form {
     background: transparent;
     display: flex;
     flex-direction: column;
     min-width: 320px;
 }
 
-.login__google {
+.sign__up__google {
     margin-bottom: 32px;
 }
 
-.login__form label {
+.sign__up__form label {
     font-weight: 600;
     font-size: 14px;
     line-height: 175%;
     color: var(--neutral-black-b600);
 }
 
-.login__form input {
+.sign__up__form input {
     margin-bottom: 16px;
 }
 
-.forgot__password {
+.policy__text {
     font-weight: 500;
     font-size: 12px;
     line-height: 200%;
-    text-transform: capitalize;
     color: var(--neutral-black-b600);
     margin-bottom: 24px;
-    align-self: flex-end;
-}
-
-.forgot__password:hover {
-    opacity: 0.7;
+    white-space: pre-line;
 }
 
 .submit__button {
@@ -85,7 +84,7 @@ const onSubmit = (e: Event) => {
     height: 44px;
 }
 
-.sign__up__text {
+.sign__in__text {
     font-weight: 400;
     font-size: 14px;
     line-height: 175%;
@@ -93,10 +92,10 @@ const onSubmit = (e: Event) => {
     align-self: center;
 }
 
-.sign__up__text button {
+.sign__in__text button {
     text-decoration: underline;
 }
-.sign__up__text button:hover {
+.sign__in__text button:hover {
     opacity: 0.7;
 }
 </style>
