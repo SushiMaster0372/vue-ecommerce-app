@@ -2,7 +2,7 @@
     <header class="app__header">
         <div class="logo">
             <RouterLink :to="AppRoutes.MAIN_PAGE_URL">
-                <img :src="logo" alt="" width="250" height="85" />
+                <img :src="logo" alt="" width="150" height="80" />
             </RouterLink>
         </div>
         <NavBar />
@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import logo from '@/assets/logo-no-background.svg'
+import logo from '@/assets/logo.svg'
 import { RouterLink } from 'vue-router'
 import NavBar from './NavBar/NavBar.vue'
 import CartButton from './CartButton.vue'

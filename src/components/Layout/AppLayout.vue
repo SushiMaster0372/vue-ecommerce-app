@@ -1,18 +1,24 @@
 <template>
-    <div class="layout">
-        <DiscountInfo />
-        <AppHeader />
-        <slot></slot>
-        <AppFooter />
-        <AuthModal />
-    </div>
+    <DiscountInfo />
+    <AppHeader />
+    <main class="page__cotainer"><slot></slot></main>
+    <AppFooter />
+    <AuthModal />
 </template>
 
 <script setup lang="ts">
 import AuthModal from '../Auth/AuthModal.vue'
-import AppFooter from './AppFooter.vue'
+import AppFooter from './AppFooter/AppFooter.vue'
 import AppHeader from './AppHeader/AppHeader.vue'
 import DiscountInfo from './DiscountInfo.vue'
 </script>
 
-<style scoped></style>
+<style scoped>
+.page__cotainer {
+    min-height: 50vh;
+    height: 100%;
+    max-width: var(--layout-max-width);
+    margin: 0 auto;
+    padding: var(--layout-paddings);
+}
+</style>

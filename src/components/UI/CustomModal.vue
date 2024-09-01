@@ -1,5 +1,5 @@
 <template>
-    <div class="modal" v-show="isOpen" @click="closeModal">
+    <div class="modal" v-if="isOpen" @click="closeModal">
         <div class="modal-content" @click.stop>
             <div class="header">
                 <slot name="title"></slot>

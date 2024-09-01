@@ -1,7 +1,5 @@
 <template>
-    <div>AppFooter</div>
+    <div>Profile</div>
 </template>
-
 <script setup lang="ts"></script>
-
-<style></style>
+<style scoped></style>
