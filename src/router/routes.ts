@@ -4,5 +4,7 @@ export enum AppRoutes {
     CART_PAGE_URL = '/cart',
     CONTACT_PAGE_URL = '/contact',
     FAVOURITES_PAGE_URL = '/favourites',
-    PROFILE_PAGE_URL = '/profile'
+    PROFILE_PAGE_URL = '/profile',
+    STORE_PAGE_URL = '/store',
+    STORE_CATEGORY_PAGE_URL = '/store/:id'
 }

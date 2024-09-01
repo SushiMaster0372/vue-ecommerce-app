@@ -1,7 +1,7 @@
 <template>
     <RouterLink class="cart__btn" :to="AppRoutes.CART_PAGE_URL">
         <FontAwesomeIcon :icon="faShoppingBag" class="bag__icon" />
-        <div v-if="!!cartStore.cartItems.length" class="cart__tag">
+        <div v-if="!!cartStore.cartItems.length && authStore.isLoggedIn" class="cart__tag">
             {{ cartStore.cartItems.length }}
         </div>
     </RouterLink>
