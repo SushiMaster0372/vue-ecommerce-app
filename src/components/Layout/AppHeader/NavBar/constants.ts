@@ -1,4 +1,4 @@
-import CategoriesButton from '@/components/CategoriesButton.vue'
+import CategoriesButton from '@/components/Layout/AppHeader/CategoriesButton.vue'
 import { AppRoutes } from '@/router/routes'
 
 const navItems = [

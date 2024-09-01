@@ -1,12 +1,12 @@
 <template>
     <div class="buttons__wrapper">
-        <button v-if="authStore.isLoggedIn" class="profile__btn" @click="openDropDown">
+        <button v-if="authStore.isLoggedIn" class="profile__btn" @click="onOpen">
             <FontAwesomeIcon :icon="faCircleUser" class="user__icon" />
         </button>
         <CustomButton v-else theme="bordered" @click="authModalStore.openAuthModal()"
             >Login</CustomButton
         >
-        <div v-if="showDropDown" class="dropdown" ref="dropDownRef">
+        <CustomDropDownList v-if="isShow" :closeDropDown="onClose">
             <button class="option" @click="onProfileClick">
                 <span>Profile</span>
             </button>
@@ -14,42 +14,35 @@
                 <span>Log out</span>
                 <FontAwesomeIcon :icon="faArrowRightFromBracket" class="logout__icon" />
             </button>
-        </div>
+        </CustomDropDownList>
     </div>
 </template>
 
 <script setup lang="ts">
 import CustomButton from '@/components/UI/CustomButton.vue'
-import useOutsideClick from '@/composable/useOutsideClick'
+import CustomDropDownList from '@/components/UI/CustomDropDownList.vue'
+import useShow from '@/composable/useShow'
 import { AppRoutes } from '@/router/routes'
 import useAuthStore from '@/stores/auth'
 import useAuthModal from '@/stores/authModal'
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons/faCircleUser'
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { ref, type VNodeRef } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-const showDropDown = ref(false)
-const dropDownRef = ref<VNodeRef | null>(null) // TODO: make Dropdown component reusable and incapsulate some logic inside of it
-
 const authModalStore = useAuthModal()
 const authStore = useAuthStore()
-
-const openDropDown = () => (showDropDown.value = true)
-const closeDropDown = () => (showDropDown.value = false)
-
-useOutsideClick({ elementRef: dropDownRef, callback: closeDropDown })
+const { isShow, onClose, onOpen } = useShow()
 
 const onProfileClick = () => {
     router.push(AppRoutes.PROFILE_PAGE_URL)
-    closeDropDown()
+    onClose()
 }
 
 const onLogOutClick = () => {
     authStore.logOut()
-    closeDropDown()
+    onClose()
 }
 </script>
 
@@ -85,21 +78,6 @@ const onLogOutClick = () => {
 
 .user__icon {
     font-size: 22px;
-}
-
-.dropdown {
-    position: absolute;
-    right: 0;
-    top: 110%;
-    min-width: 150px;
-    border-radius: 8px;
-    padding: 10px 0;
-    -webkit-box-shadow: -1px 10px 59px -1px rgba(0, 0, 0, 0.59);
-    -moz-box-shadow: -1px 10px 59px -1px rgba(0, 0, 0, 0.59);
-    box-shadow: -1px 10px 59px -1px rgba(0, 0, 0, 0.59);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
 }
 
 .logout__icon {

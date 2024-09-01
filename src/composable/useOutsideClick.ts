@@ -2,7 +2,7 @@ import { onMounted, onUnmounted, type Ref } from 'vue'
 
 type TProps = {
     elementRef: Ref<HTMLElement | null>
-    callback: (event: MouseEvent) => void
+    callback: (event?: MouseEvent) => void
 }
 
 const useOutsideClick = ({ elementRef, callback }: TProps) => {
