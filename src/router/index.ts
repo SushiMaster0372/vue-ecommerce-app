@@ -37,6 +37,11 @@ const router = createRouter({
             path: AppRoutes.STORE_CATEGORY_PAGE_URL,
             name: 'store-category',
             component: () => import('../views/StoreCategoryPage.vue')
+        },
+        {
+            path: AppRoutes.PROFILE_PAGE_URL,
+            name: 'profile',
+            component: () => import('../views/ProfilePage.vue')
         }
     ]
 })
