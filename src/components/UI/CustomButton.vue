@@ -35,6 +35,10 @@ const buttonClasses = computed(() => {
     transition: all 0.3s;
 }
 
+.base-button:active {
+    transform: scale(0.95);
+}
+
 .button-filled {
     background: var(--neutral-black-b900);
     color: var(--neutral-white-w900);
