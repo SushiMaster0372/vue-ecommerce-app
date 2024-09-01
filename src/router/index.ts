@@ -27,6 +27,16 @@ const router = createRouter({
             path: AppRoutes.CART_PAGE_URL,
             name: 'cart',
             component: () => import('../views/CartPage.vue')
+        },
+        {
+            path: AppRoutes.STORE_PAGE_URL,
+            name: 'store',
+            component: () => import('../views/StorePage.vue')
+        },
+        {
+            path: AppRoutes.STORE_CATEGORY_PAGE_URL,
+            name: 'store-category',
+            component: () => import('../views/StoreCategoryPage.vue')
         }
     ]
 })

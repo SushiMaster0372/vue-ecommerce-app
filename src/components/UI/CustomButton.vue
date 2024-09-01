@@ -8,7 +8,7 @@
 <script setup lang="ts">
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { computed, defineProps } from 'vue'
+import { computed } from 'vue'
 
 const props = withDefaults(
     defineProps<{
