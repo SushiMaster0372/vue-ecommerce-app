@@ -16,16 +16,9 @@
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
-defineProps<{
-    isOpen: boolean
-}>()
-const emit = defineEmits<{
-    (e: 'update:isOpen', value: boolean): void
-}>()
+const isOpen = defineModel<boolean>('isOpen')
 
-const closeModal = () => {
-    emit('update:isOpen', false)
-}
+const closeModal = () => (isOpen.value = false)
 </script>
 
 <style scoped>
