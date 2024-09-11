@@ -17,8 +17,5 @@ import DiscountInfo from './DiscountInfo.vue'
 .page__cotainer {
     min-height: 50vh;
     height: 100%;
-    max-width: var(--layout-max-width);
-    margin: 0 auto;
-    padding: var(--layout-paddings);
 }
 </style>
