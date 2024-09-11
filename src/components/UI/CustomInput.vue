@@ -1,22 +1,8 @@
 <template>
-    <input class="input" :value="modelValue" @input="onChange" />
+    <input class="input" v-model="model" />
 </template>
 <script setup lang="ts">
-import type { InputHTMLAttributes } from 'vue'
-
-interface TProps extends /* @vue-ignore */ InputHTMLAttributes {
-    modelValue?: string
-}
-
-defineProps<TProps>()
-
-const emit = defineEmits<{
-    (event: 'update:modelValue', value: string): void
-}>()
-
-const onChange = (e: Event) => {
-    emit('update:modelValue', (e.target as HTMLInputElement).value)
-}
+const model = defineModel<string>()
 </script>
 <style scoped>
 .input {

@@ -31,6 +31,7 @@ const categortiesStore = useCategoriesStore()
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 20px;
     grid-template-rows: auto;
+    background-color: var(--neutral-white-w900);
 }
 
 .category {

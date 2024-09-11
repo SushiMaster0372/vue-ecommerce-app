@@ -1,6 +1,6 @@
 <template>
     <footer class="footer__container">
-        <div class="footer">
+        <LayoutContainer>
             <NewsletterForm v-if="!authStore.isLoggedIn" />
             <div class="footer__sections">
                 <div class="logo__section">
@@ -50,7 +50,7 @@
                 </div>
             </div>
             <span class="copyright">© 2024 Onyx. All rights reserved.</span>
-        </div>
+        </LayoutContainer>
     </footer>
 </template>
 
@@ -63,6 +63,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { AppRoutes } from '@/router/routes'
 import { faCcMastercard, faCcPaypal, faCcVisa } from '@fortawesome/free-brands-svg-icons'
 import { RouterLink } from 'vue-router'
+import LayoutContainer from '../LayoutContainer.vue'
 
 const authStore = useAuthStore()
 </script>
@@ -73,12 +74,6 @@ const authStore = useAuthStore()
     color: var(--neutral-white-w900);
     width: 100%;
     padding: 59px 0 27px;
-}
-
-.footer {
-    max-width: var(--layout-max-width);
-    margin: 0 auto;
-    padding: var(--layout-paddings);
 }
 
 .footer__sections {

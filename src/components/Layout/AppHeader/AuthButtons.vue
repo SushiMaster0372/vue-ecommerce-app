@@ -3,7 +3,10 @@
         <button v-if="authStore.isLoggedIn" class="profile__btn" @click="onOpen">
             <FontAwesomeIcon :icon="faCircleUser" class="user__icon" />
         </button>
-        <CustomButton v-else theme="bordered" @click="authModalStore.openAuthModal()"
+        <CustomButton
+            v-else
+            theme="bordered"
+            @click="authModalStore.openAuthModal(AuthFormTypes.LOGIN)"
             >Login</CustomButton
         >
         <CustomDropDownList v-if="isShow" :closeDropDown="onClose">
@@ -25,6 +28,7 @@ import useShow from '@/composable/useShow'
 import { AppRoutes } from '@/router/routes'
 import useAuthStore from '@/stores/auth'
 import useAuthModal from '@/stores/authModal'
+import { AuthFormTypes } from '@/stores/authModal/types'
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons/faCircleUser'
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
